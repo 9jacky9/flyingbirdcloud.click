@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技术专栏 - FlyingBird机场 网络工程与代理协议深度前沿</title>
+  <meta name="description" content="FlyingBird机场技术专栏，汇聚国际专网拓扑、BGP路由解析、流媒体分流技巧及代理客户端深度实测指南。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 头部导航 -->
+  <header class="swiss-header">
+    <div class="swiss-container swiss-nav-wrap">
+      <a href="index.html" class="swiss-logo" aria-label="FlyingBird机场首页">
+        <svg viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M12 38L24 10L36 28L28 38H12Z" fill="#DC2626"/>
+            <path d="M26 24L38 6L48 20L40 32H28L34 24H26Z" fill="#0F172A"/>
+            <path d="M4 38L18 20H28L14 38H4Z" fill="#DC2626" opacity="0.65"/>
+          </g>
+          <text x="60" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" fill="#0F172A">FlyingBird<tspan fill="#DC2626">机场</tspan></text>
+        </svg>
+      </a>
+
+      <!-- 移动端汉堡切换按钮 -->
+      <button class="mobile-nav-toggle" id="swissMenuBtn" aria-label="切换导航菜单" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="swiss-nav-container" id="swissNavMenu">
+        <ul class="swiss-nav-links">
+          <li><a href="index.html#features">专线表现</a></li>
+          <li><a href="index.html#streaming">流媒体与AI</a></li>
+          <li><a href="index.html#pricing">方案定价</a></li>
+          <li><a href="index.html#reviews">用户评价</a></li>
+          <li><a href="index.html#faq">常见问题</a></li>
+          <li><a href="journal.html" style="color: var(--color-primary);">技术专栏</a></li>
+        </ul>
+      </nav>
+
+      <div class="swiss-header-actions">
+        <a href="https://ww012.twilightaff.com/#/?code=A56DH1Af" class="btn btn-primary" rel="nofollow" target="_blank">立即注册</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 专栏头部 -->
+  <section class="article-hub-header">
+    <div class="swiss-container">
+      <span class="article-hub-tag">Engineering Insights</span>
+      <h1 class="article-hub-title">技术专栏与网络内参</h1>
+      <p class="article-hub-desc">
+        聚焦跨国低延迟网络架构、IPLC 物理专线演进、主流客户端协议优化与流媒体分流调优实战，助您全面掌控纯净高速的数字通道。
+      </p>
+    </div>
+  </section>
+
+  <!-- 6篇深度文章列表 -->
+  <section class="article-grid-section">
+    <div class="swiss-container">
+      <div class="article-cards-list">
+
+        <!-- 文章 1: 品牌评测 (含首页内链) -->
+        <article class="article-item-card">
+          <span class="article-item-tag">专网深度评测</span>
+          <h2 class="article-item-title">
+            <a href="flyingbird-airport-review-speedtest.html">2026实测 FlyingBird机场：BGP与IPLC专线速度延迟全维度评测与配置指南</a>
+          </h2>
+          <p class="article-item-excerpt">
+            通过覆盖亚太与欧美的 10 个核心节点实测，深度剖析 FlyingBird机场 的物理专线延迟、4K流媒体吞吐及大模型高频调用表现。
+          </p>
+          <div class="article-item-meta">
+            <span>网络实验室 · 2026-10-18</span>
+            <span>8 分钟阅读</span>
+          </div>
+        </article>
+
+        <!-- 文章 2: 客户端横评 -->
+        <article class="article-item-card">
+          <span class="article-item-tag">客户端横评</span>
+          <h2 class="article-item-title">
+            <a href="shadowrocket-clash-singbox-benchmark.html">跨平台主流代理客户端深度横评：Clash Verge、Sing-box 与 Loon 性能与内存开销对照</a>
+          </h2>
+          <p class="article-item-excerpt">
+            全面量化不同平台常见代理客户端在多线程并发、规则解析速度及长时间待机下的 CPU 与内存损耗，给出不同场景的最佳工具选型方案。
+          </p>
+          <div class="article-item-meta">
+            <span>架构观察 · 2026-10-15</span>
+            <span>7 分钟阅读</span>
+          </div>
+        </article>
+
+        <!-- 文章 3: IPLC 与 BGP -->
+        <article class="article-item-card">
+          <span class="article-item-tag">底层网络原理</span>
+          <h2 class="article-item-title">
+            <a href="iplc-bgp-transit-latency-explained.html">告别晚高峰卡顿：详解 IPLC 内网专线与传统公网 BGP 转发的技术机理与成本差异</a>
+          </h2>
+          <p class="article-item-excerpt">
+            为什么一到晚上八九点普通代理就卡死？本文拆解国际出口物理专线与公网路由的本质差异，带您看懂专线不丢包背后的高成本工程逻辑。
+          </p>
+          <div class="article-item-meta">
+            <span>传输协议 · 2026-10-12</span>
+            <span>8 分钟阅读</span>
+          </div>
+        </article>
+
+        <!-- 文章 4: ChatGPT 访问排查 -->
+        <article class="article-item-card">
+          <span class="article-item-tag">AI 生产力保障</span>
+          <h2 class="article-item-title">
+            <a href="chatgpt-claude-api-access-denied-fix.html">彻底解决 ChatGPT 与 Claude 报错 1020 与 Access Denied：住宅 IP 纯净度与欺诈值排查</a>
+          </h2>
+          <p class="article-item-excerpt">
+            系统梳理 Cloudflare 与 OpenAI 针对机房 IP 的多重风控过滤策略，指导开发者如何利用原生家庭宽带节点消除登录报错与频繁验证码。
+          </p>
+          <div class="article-item-meta">
+            <span>安全前沿 · 2026-10-09</span>
+            <span>7 分钟阅读</span>
+          </div>
+        </article>
+
+        <!-- 文章 5: Netflix 流媒体解锁 -->
+        <article class="article-item-card">
+          <span class="article-item-tag">流媒体与影音</span>
+          <h2 class="article-item-title">
+            <a href="netflix-disney-4k-streaming-optimization.html">玩转 Netflix 4K 与 Disney+ 全区解锁：DNS 劫持防护与流媒体分流路由规则实操</a>
+          </h2>
+          <p class="article-item-excerpt">
+            如何精准解锁非自制剧并享受 4K HDR 极致画质？从 DoH 加密防污染解析到智能 Rule-Provider 分流规则调优，全流程实操解析。
+          </p>
+          <div class="article-item-meta">
+            <span>影视极客 · 2026-10-05</span>
+            <span>8 分钟阅读</span>
+          </div>
+        </article>
+
+        <!-- 文章 6: OpenWrt 旁路由搭建 -->
+        <article class="article-item-card">
+          <span class="article-item-tag">家庭软路由</span>
+          <h2 class="article-item-title">
+            <a href="home-router-openwrt-passwall-setup.html">全屋透明网络加速实战：基于 OpenWrt 旁路由的低延迟分流网关搭建与避坑手册</a>
+          </h2>
+          <p class="article-item-excerpt">
+            详解主路由与旁路由双机架构的 IP 配置、网关指向与 DNS 回环防范，实现全家电视、手机、游戏主机即开即用的全局无感智能分流。
+          </p>
+          <div class="article-item-meta">
+            <span>硬件玩家 · 2026-10-02</span>
+            <span>8 分钟阅读</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚：严格仅显示4个中文标题 -->
+  <footer class="swiss-footer">
+    <div class="swiss-container">
+      <nav aria-label="页脚导航">
+        <ul class="footer-nav">
+          <li><a href="sitemap.html">网站地图</a></li>
+          <li><a href="about.html">关于我们</a></li>
+          <li><a href="terms.html">服务条款</a></li>
+          <li><a href="privacy.html">隐私政策</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copyright">© 2026 FlyingBird机场. 保留所有权利。</p>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    var btn = document.getElementById('swissMenuBtn');
+    var nav = document.getElementById('swissNavMenu');
+    if (btn && nav) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = nav.classList.toggle('is-open');
+        btn.classList.toggle('is-active');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+      document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !btn.contains(e.target)) {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-active');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      var links = nav.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function() {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      }
+    }
+  })();
+  </script>
+</body>
+</html>

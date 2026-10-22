@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全屋透明网络加速实战：基于 OpenWrt 旁路由的低延迟分流网关搭建与避坑手册 - 技术专栏</title>
+  <meta name="description" content="详细讲解OpenWrt旁路由搭建拓扑结构，PassWall与OpenClash插件分流配置，网关与DNS防回环避坑指南，实现全屋设备无感透明加速。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="swiss-header">
+    <div class="swiss-container swiss-nav-wrap">
+      <a href="index.html" class="swiss-logo" aria-label="返回首页">
+        <svg viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M12 38L24 10L36 28L28 38H12Z" fill="#DC2626"/>
+            <path d="M26 24L38 6L48 20L40 32H28L34 24H26Z" fill="#0F172A"/>
+            <path d="M4 38L18 20H28L14 38H4Z" fill="#DC2626" opacity="0.65"/>
+          </g>
+          <text x="60" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" fill="#0F172A">FlyingBird<tspan fill="#DC2626">机场</tspan></text>
+        </svg>
+      </a>
+      <div class="swiss-header-actions">
+        <a href="https://ww012.twilightaff.com/#/?code=A56DH1Af" class="btn btn-primary" rel="nofollow" target="_blank">进入控制台</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 文章正文区域 -->
+  <main class="article-detail-wrap">
+    <div class="swiss-container">
+      <div class="article-inner-container">
+        <a href="journal.html" class="article-nav-back">← 返回技术专栏</a>
+
+        <header class="article-post-header">
+          <span class="article-post-category">家庭软路由</span>
+          <h1 class="article-post-title">全屋透明网络加速实战：基于 OpenWrt 旁路由的低延迟分流网关搭建与避坑手册</h1>
+          <div class="article-post-meta-row">
+            <span>作者：硬件极客测评组</span>
+            <span>发布日期：2026-10-02</span>
+            <span>字数：约 1,160 字</span>
+            <span>预计阅读：8 分钟</span>
+          </div>
+        </header>
+
+        <article class="article-body">
+          <p>
+            在智能手机、平板电脑、智能电视、游戏机及智能家居设备充斥现代家庭的背景下，为每一台终端单独安装与开启代理客户端不仅繁琐低效，而且很多受限设备（如 PS5、Switch、部分智能音箱）根本无法安装第三方代理工具。如果希望为家庭网关配备兼顾大吞吐与长久稳定的节点线路，建议参考由业内资深玩家编写的 <a href="https://tizilab.net/" target="_blank">2026年度好用梯子节点实测</a> 排行榜。本文将系统拆解如何利用一台低功耗迷你主机搭建一套全屋无感透明分流旁路由网络。
+          </p>
+
+          <h2>一、 主路由与旁路由网络拓扑设计原理</h2>
+          <p>
+            很多初学者在搭建软路由时，盲目选择将软路由作为拨号主路由使用，一旦系统出现死机或插件崩溃，全屋所有设备立即断网，直接影响家人正常的本地网络使用。相比之下，“旁路由（旁路网关）”模式是目前容错率最高的拓扑形态。
+          </p>
+
+          <h3>1. 单网口与双网口设备硬件选型分析</h3>
+          <p>
+            采用 Intel N100、J4125 或 ARM 架构（如 RK3568/RK3588）的单/双网口小工控机均可胜任。主路由器（如华硕或普通 Wi-Fi 6 路由器）继续负责光猫 PPPoE 拨号与 DHCP 地址分发，旁路由通过单根网线接入主路由 LAN 口，仅作为特定需要加速设备的网关中继。
+          </p>
+
+          <h2>二、 网关与 DNS 劫持防止回环的配置要点</h2>
+          <p>
+            旁路由配置中最常见、也最致命的故障就是“网络回环”与“国内流量绕行降速”。配置时必须严格遵循以下参数标准：
+          </p>
+
+          <h3>1. IPv6 泄漏排查与本地网络优化</h3>
+          <p>
+            首先，将旁路由的静态 IP 设置为与主路由同网段（例如主路由为 192.168.1.1，旁路由设为 192.168.1.2），旁路由的网关和首选 DNS 必须严格指向主路由 IP（192.168.1.1）。在防火墙中务必勾选“动态伪装（MASQUERADE）”或添加一条 iptables 转发规则。同时，建议在旁路由端直接禁用 IPv6 DHCP 分发，避免因 IPv6 绕过代理规则导致真实的运营商 IP 泄漏。
+          </p>
+
+          <h2>三、 PassWall 与 OpenClash 插件策略组定制</h2>
+          <p>
+            在 OpenWrt 插件生态中，PassWall 与 OpenClash 是目前最主流的两大透明代理工具。
+          </p>
+
+          <h3>1. 国内直连与国外代理的分流黑白名单</h3>
+          <p>
+            无论采用哪款插件，核心原则都是“<strong>国内域名走直连，海外解析走代理</strong>”。配置分流模式时，首选“中国大陆白名单（ChinaDNS）”或精确规则模式。将主流国内 CDN 与银行金融服务直接由主路由原生解析直出，海外未匹配域名交由海外加密节点代为解析。这样能彻底避免网银人脸识别失败或国内手游延迟变高的问题。
+          </p>
+
+          <h2>四、 多终端智能家居无感互联体验测试</h2>
+          <p>
+            部署完成后，对于需要海外加速的特定设备（如主卧的 Apple TV 或办公用电脑），只需在终端的 Wi-Fi 设置中将“网关”与“DNS”手动修改为旁路由 IP（192.168.1.2）。其余普通智能家居设备（如扫地机、空调网关）继续默认使用主路由网关。
+          </p>
+          <p>
+            实测在 Apple TV 上打开 YouTube 4K 与 Netflix，视频加载几乎瞬间完成，无需任何额外开启软件的操作；而当旁路由哪怕发生意外断电重启，客厅普通手机与智能家电由于走主路由通道，依然能够正常上网，全屋网络体系展现了极高的弹性容灾能力。
+          </p>
+
+          <h2>五、 旁路由日常运行维护与自启动守护</h2>
+          <p>
+            为保障软路由网关全天候 365 天无故障运行，建议在 OpenWrt 系统计划任务（Crontab）中加入定期的健康度检测脚本。若连续多次对公网 DNS 探测失败，脚本自动重启核心转发进程。打造一套优秀的家庭软路由系统，其终极追求就是“无感”——让全家人在日常用网中彻底忘记它的存在，享受真正如丝般顺滑的全局互联体验。
+          </p>
+        </article>
+
+        <div class="article-end-box">
+          <h4>关于本专栏</h4>
+          <p>本技术专栏由网络架构观察员团队独立撰写与维护，力求以严谨客观的工程实测数据为技术爱好者提供参考。</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="swiss-footer">
+    <div class="swiss-container">
+      <nav aria-label="页脚导航">
+        <ul class="footer-nav">
+          <li><a href="sitemap.html">网站地图</a></li>
+          <li><a href="about.html">关于我们</a></li>
+          <li><a href="terms.html">服务条款</a></li>
+          <li><a href="privacy.html">隐私政策</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copyright">© 2026 FlyingBird机场. 保留所有权利。</p>
+    </div>
+  </footer>
+
+</body>
+</html>

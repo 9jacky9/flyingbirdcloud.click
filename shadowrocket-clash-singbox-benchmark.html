@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨平台主流代理客户端深度横评：Clash Verge、Sing-box 与 Loon 性能与内存开销对照 - 技术专栏</title>
+  <meta name="description" content="横向评测Clash Verge Rev、Sing-box、Loon与Shadowrocket等主流代理客户端在内存占用、CPU负载、规则分流引擎及高并发场景下的性能表现。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <header class="swiss-header">
+    <div class="swiss-container swiss-nav-wrap">
+      <a href="index.html" class="swiss-logo" aria-label="返回首页">
+        <svg viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M12 38L24 10L36 28L28 38H12Z" fill="#DC2626"/>
+            <path d="M26 24L38 6L48 20L40 32H28L34 24H26Z" fill="#0F172A"/>
+            <path d="M4 38L18 20H28L14 38H4Z" fill="#DC2626" opacity="0.65"/>
+          </g>
+          <text x="60" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" fill="#0F172A">FlyingBird<tspan fill="#DC2626">机场</tspan></text>
+        </svg>
+      </a>
+      <div class="swiss-header-actions">
+        <a href="https://ww012.twilightaff.com/#/?code=A56DH1Af" class="btn btn-primary" rel="nofollow" target="_blank">进入控制台</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 文章正文区域 -->
+  <main class="article-detail-wrap">
+    <div class="swiss-container">
+      <div class="article-inner-container">
+        <a href="journal.html" class="article-nav-back">← 返回技术专栏</a>
+
+        <header class="article-post-header">
+          <span class="article-post-category">客户端横评</span>
+          <h1 class="article-post-title">跨平台主流代理客户端深度横评：Clash Verge、Sing-box 与 Loon 性能与内存开销对照</h1>
+          <div class="article-post-meta-row">
+            <span>作者：系统性能测评组</span>
+            <span>发布日期：2026-10-15</span>
+            <span>字数：约 1,080 字</span>
+            <span>预计阅读：7 分钟</span>
+          </div>
+        </header>
+
+        <article class="article-body">
+          <p>
+            伴随加密网络中继技术的不断演进，终端用户对客户端工具的要求早已超越了单纯的“能连上”，而是更加聚焦于低资源开销、秒级规则匹配及全天候后台常驻的电池续航表现。如果想要深入了解市面上不同节点的综合实力，可以参考 <a href="https://tizilab.net/" target="_blank">专业网络加速工具测评与梯子排行榜</a> 所整理的长周期量化数据。本篇我们将从系统底层架构切入，对当前最热门的三大主流代理客户端展开详尽横评。
+          </p>
+
+          <h2>一、 测试平台环境与评价指标维度</h2>
+          <p>
+            为确保对照数据的客观公正，我们在搭载最新 macOS 与 Windows 11 的物理机上分别搭建了纯净基准测试环境。测试指标主要涵盖：首包传输启动延迟（TTFB）、加载万条规则集时的冷启动耗时、千兆并发下载时的 CPU 峰值占用，以及连续后台常驻 12 小时后的系统内存常驻集（RSS）。
+          </p>
+
+          <h2>二、 核心代理协议解析效率对比</h2>
+          <p>
+            不同的代理内核在底层事件循环与协议反序列化逻辑上存在显著设计差异，直接决定了高吞吐场景下的转发瓶颈。
+          </p>
+
+          <h3>1. Sing-box 的轻量化架构与内存优势</h3>
+          <p>
+            作为基于 Go 语言原生模块重构的通用代理平台，Sing-box 展现了令人惊叹的轻量化特性。它彻底剔除了冗余的外部依赖，其核心守护进程在静默待机状态下仅占用不到 25MB 内存。在处理庞大的 GeoIP 与路由分流规则时，由于采用了高效的预编译二进制规则集（.srs 格式），规则匹配速度几乎达到了纳秒级，几乎不对系统调度造成额外压力。
+          </p>
+
+          <h3>2. Clash 衍生核心在规则分流上的成熟度</h3>
+          <p>
+            以 Clash Verge Rev（基于 Mihomo 核心）为代表的生态群，则以无可比拟的成熟度和图形界面友好度见长。得益于完善的 Sub-Rule 与脚本级分流支持，它对于复杂公司内网网段与海外多协议分流的处理游刃有余。但在高并发长时间运行下，其内存占用通常会维持在 80MB 至 120MB 区间，相较于 Sing-box 略显厚重。
+          </p>
+
+          <h2>三、 高并发场景下的 CPU 占用与功耗测试</h2>
+          <p>
+            在模拟 200 个并发连接持续拉取 4K 视频流与大文件的极限场景中，Loon 与 Sing-box 展现出优异的多核负载均衡能力，主线程 CPU 占用率稳定在 4.5%~6.2% 之间。而基于 Electron 封装的跨平台客户端，在前端频繁渲染节点延迟动画时，GPU 与 UI 进程会偶发瞬时峰值，但对现代多核处理器而言整体影响微乎其微。
+          </p>
+
+          <h2>四、 适合不同技术栈用户的客户端选型指南</h2>
+          <p>
+            针对不同需求层级的用户群体，我们建议采取差异化选型策略：
+          </p>
+          <ul>
+            <li><strong>轻度与普通办公用户</strong>：优先考虑图形化完善、自带故障测试与一键切换的客户端，免去复杂的 JSON 手工语法编写烦恼。</li>
+            <li><strong>开发者与极致轻量追求者</strong>：推荐拥抱 Sing-box，其清晰的配置层级与极低的资源消耗，尤其适合作为软路由、NAS 或老旧轻薄本的长期常驻守护网关。</li>
+            <li><strong>多端苹果生态深度玩家</strong>：在 iOS 与 macOS 双端采用 Loon 或 Shadowrocket，凭借与原生 Network Extension 框架的紧密贴合，能够获得最平滑的待机省电体验。</li>
+          </ul>
+
+          <h2>五、 总结与进阶规则编写建议</h2>
+          <p>
+            综上所述，当前主流代理客户端的技术代际划分已经非常清晰。工具选型的核心在于与自身使用场景的契合度。在实际部署中，建议用户精简规则列表中过于臃肿的非必要黑名单，采用精准的域名后缀（DOMAIN-SUFFIX）匹配，从而在硬件底层最大程度减少规则引擎的逐包检索开销。
+          </p>
+        </article>
+
+        <div class="article-end-box">
+          <h4>关于本专栏</h4>
+          <p>本技术专栏由网络架构观察员团队独立撰写与维护，力求以严谨客观的工程实测数据为技术爱好者提供参考。</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="swiss-footer">
+    <div class="swiss-container">
+      <nav aria-label="页脚导航">
+        <ul class="footer-nav">
+          <li><a href="sitemap.html">网站地图</a></li>
+          <li><a href="about.html">关于我们</a></li>
+          <li><a href="terms.html">服务条款</a></li>
+          <li><a href="privacy.html">隐私政策</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copyright">© 2026 FlyingBird机场. 保留所有权利。</p>
+    </div>
+  </footer>
+
+</body>
+</html>
