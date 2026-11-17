@@ -6,6 +6,7 @@
   <title>技术专栏 - FlyingBird机场 网络工程与代理协议深度前沿</title>
   <meta name="description" content="FlyingBird机场技术专栏，汇聚国际专网拓扑、BGP路由解析、流媒体分流技巧及代理客户端深度实测指南。">
   <link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://flyingbirdcloud.click/journal.html">
 </head>
 <body>
 
@@ -66,12 +67,8 @@
         <!-- 文章 1: 品牌评测 (含首页内链) -->
         <article class="article-item-card">
           <span class="article-item-tag">专网深度评测</span>
-          <h2 class="article-item-title">
-            <a href="flyingbird-airport-review-speedtest.html">2026实测 FlyingBird机场：BGP与IPLC专线速度延迟全维度评测与配置指南</a>
-          </h2>
-          <p class="article-item-excerpt">
-            通过覆盖亚太与欧美的 10 个核心节点实测，深度剖析 FlyingBird机场 的物理专线延迟、4K流媒体吞吐及大模型高频调用表现。
-          </p>
+          <h2 class="article-item-title">FlyingBird机场使用前检查：线路标签、设备配置与晚间复测</h2>
+          <p class="article-item-excerpt">围绕FlyingBird机场建立个人测试清单，核对服务条款和客户端支持，用实际任务判断适用性。</p>
           <div class="article-item-meta">
             <span>网络实验室 · 2026-10-18</span>
             <span>8 分钟阅读</span>
@@ -81,12 +78,8 @@
         <!-- 文章 2: 客户端横评 -->
         <article class="article-item-card">
           <span class="article-item-tag">客户端横评</span>
-          <h2 class="article-item-title">
-            <a href="shadowrocket-clash-singbox-benchmark.html">跨平台主流代理客户端深度横评：Clash Verge、Sing-box 与 Loon 性能与内存开销对照</a>
-          </h2>
-          <p class="article-item-excerpt">
-            全面量化不同平台常见代理客户端在多线程并发、规则解析速度及长时间待机下的 CPU 与内存损耗，给出不同场景的最佳工具选型方案。
-          </p>
+          <h2 class="article-item-title">Clash、sing-box与移动客户端怎么比较：兼容性、资源和维护清单</h2>
+          <p class="article-item-excerpt">不编造横评成绩，按系统支持、配置格式、接管范围和可恢复性建立自己的客户端比较方法。</p>
           <div class="article-item-meta">
             <span>架构观察 · 2026-10-15</span>
             <span>7 分钟阅读</span>
@@ -96,12 +89,8 @@
         <!-- 文章 3: IPLC 与 BGP -->
         <article class="article-item-card">
           <span class="article-item-tag">底层网络原理</span>
-          <h2 class="article-item-title">
-            <a href="iplc-bgp-transit-latency-explained.html">告别晚高峰卡顿：详解 IPLC 内网专线与传统公网 BGP 转发的技术机理与成本差异</a>
-          </h2>
-          <p class="article-item-excerpt">
-            为什么一到晚上八九点普通代理就卡死？本文拆解国际出口物理专线与公网路由的本质差异，带您看懂专线不丢包背后的高成本工程逻辑。
-          </p>
+          <h2 class="article-item-title">IPLC与BGP线路标签怎么读：从协议、交付范围到晚高峰测试</h2>
+          <p class="article-item-excerpt">区分路由协议与连接产品，核对线路宣传的实际含义，用真实任务和成本条款判断适用性。</p>
           <div class="article-item-meta">
             <span>传输协议 · 2026-10-12</span>
             <span>8 分钟阅读</span>
@@ -111,12 +100,8 @@
         <!-- 文章 4: ChatGPT 访问排查 -->
         <article class="article-item-card">
           <span class="article-item-tag">AI 生产力保障</span>
-          <h2 class="article-item-title">
-            <a href="chatgpt-claude-api-access-denied-fix.html">彻底解决 ChatGPT 与 Claude 报错 1020 与 Access Denied：住宅 IP 纯净度与欺诈值排查</a>
-          </h2>
-          <p class="article-item-excerpt">
-            系统梳理 Cloudflare 与 OpenAI 针对机房 IP 的多重风控过滤策略，指导开发者如何利用原生家庭宽带节点消除登录报错与频繁验证码。
-          </p>
+          <h2 class="article-item-title">ChatGPT与Claude拒绝访问怎么排查：先分清网页、接口与权限错误</h2>
+          <p class="article-item-excerpt">区分网络连接、账号权限和服务支持条件，整理可交给支持团队的脱敏错误记录，不依赖所谓IP纯净度保证。</p>
           <div class="article-item-meta">
             <span>安全前沿 · 2026-10-09</span>
             <span>7 分钟阅读</span>
@@ -126,12 +111,8 @@
         <!-- 文章 5: Netflix 流媒体解锁 -->
         <article class="article-item-card">
           <span class="article-item-tag">流媒体与影音</span>
-          <h2 class="article-item-title">
-            <a href="netflix-disney-4k-streaming-optimization.html">玩转 Netflix 4K 与 Disney+ 全区解锁：DNS 劫持防护与流媒体分流路由规则实操</a>
-          </h2>
-          <p class="article-item-excerpt">
-            如何精准解锁非自制剧并享受 4K HDR 极致画质？从 DoH 加密防污染解析到智能 Rule-Provider 分流规则调优，全流程实操解析。
-          </p>
+          <h2 class="article-item-title">Netflix与Disney+播放问题：先核对资格，再检查解析和分流</h2>
+          <p class="article-item-excerpt">区分平台访问条件、画质支持与网络传输，使用固定片源排查播放失败和画质下降，不承诺全区可用。</p>
           <div class="article-item-meta">
             <span>影视极客 · 2026-10-05</span>
             <span>8 分钟阅读</span>
@@ -141,12 +122,8 @@
         <!-- 文章 6: OpenWrt 旁路由搭建 -->
         <article class="article-item-card">
           <span class="article-item-tag">家庭软路由</span>
-          <h2 class="article-item-title">
-            <a href="home-router-openwrt-passwall-setup.html">全屋透明网络加速实战：基于 OpenWrt 旁路由的低延迟分流网关搭建与避坑手册</a>
-          </h2>
-          <p class="article-item-excerpt">
-            详解主路由与旁路由双机架构的 IP 配置、网关指向与 DNS 回环防范，实现全家电视、手机、游戏主机即开即用的全局无感智能分流。
-          </p>
+          <h2 class="article-item-title">OpenWrt旁路分流部署清单：备份、单机测试与故障回退</h2>
+          <p class="article-item-excerpt">在保留家庭主网络的前提下验证旁路设备，核对版本、路由和局域网访问，避免直接套用配置。</p>
           <div class="article-item-meta">
             <span>硬件玩家 · 2026-10-02</span>
             <span>8 分钟阅读</span>
